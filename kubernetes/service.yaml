@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: thumbnailer
+spec:
+  selector:
+    app: thumbnailer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
