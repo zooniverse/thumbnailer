@@ -1,7 +1,5 @@
 #!groovy
 
-dockerImageName = null
-
 pipeline {
   agent none
 
@@ -26,7 +24,7 @@ pipeline {
       steps {
         script {
           def dockerRepoName = 'zooniverse/thumbnailer'
-          dockerImageName = "${dockerRepoName}:${GIT_COMMIT}"
+          def dockerImageName = "${dockerRepoName}:${GIT_COMMIT}"
           def newImage = null
 
           newImage = docker.build(dockerImageName)
