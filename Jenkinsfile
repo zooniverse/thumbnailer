@@ -42,7 +42,8 @@ pipeline {
       when { branch 'master' }
       agent any
       steps {
-        sh "kubectl set image --record -f kubernetes/deployment.yaml thumbnailer-nginx=${dockerImageName}"
+        sh "kubectl apply -f kubernetes/"
+        sh "sed 's/__IMAGE_TAG__/${GIT_COMMIT}/g' kubernetes/deployment.tmpl | kubectl apply -f -"
       }
     }
   }
