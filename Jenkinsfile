@@ -42,8 +42,8 @@ pipeline {
       when { branch 'master' }
       agent any
       steps {
-        sh "kubectl apply -f kubernetes/"
-        sh "sed 's/__IMAGE_TAG__/${GIT_COMMIT}/g' kubernetes/deployment.tmpl | kubectl apply -f -"
+        sh "kubectl apply --record -f kubernetes/"
+        sh "sed 's/__IMAGE_TAG__/${GIT_COMMIT}/g' kubernetes/deployment.tmpl | kubectl apply --record -f -"
       }
     }
   }
