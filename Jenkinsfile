@@ -1,5 +1,7 @@
 #!groovy
 
+dockerImageName = null
+
 pipeline {
   agent none
 
@@ -24,12 +26,14 @@ pipeline {
       steps {
         script {
           def dockerRepoName = 'zooniverse/thumbnailer'
-          def dockerImageName = "${dockerRepoName}:latest"
+          dockerImageName = "${dockerRepoName}:${GIT_COMMIT}"
           def newImage = null
 
           newImage = docker.build(dockerImageName)
+          newImage.push()
+
           if (BRANCH_NAME == 'master') {
-            newImage.push()
+            newImage.push('latest')
           }
         }
       }
@@ -38,8 +42,7 @@ pipeline {
       when { branch 'master' }
       agent any
       steps {
-        sh "kubectl apply -f kubernetes/deployment.yaml"
-        sh "kubectl apply -f kubernetes/service.yaml"
+        sh "kubectl set image --record -f kubernetes/deployment.yaml thumbnailer-nginx=${dockerImageName}"
       }
     }
   }
