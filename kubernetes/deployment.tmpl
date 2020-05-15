@@ -17,5 +17,12 @@ spec:
       containers:
         - name: thumbnailer-nginx
           image: zooniverse/thumbnailer:__IMAGE_TAG__
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "300m"
+            limits:
+              memory: "300Mi"
+              cpu: "500m"
           ports:
             - containerPort: 80
