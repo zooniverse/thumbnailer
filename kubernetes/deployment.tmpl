@@ -26,3 +26,16 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 80
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: thumbnailer
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: thumbnailer
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
