@@ -3,8 +3,9 @@
 Generates on-demand thumbnails of images from the zoo
 owned Azure blob storage and (currently) specific S3 buckets. These buckets are allowed:
 
-1. panoptesuploads (Azure storage account)
-2. www.galaxyzoo.org (S3 bucket)
+1. panoptesuploads (Azure storage account, `public` container)
+2. www.galaxyzoo.org (S3 bucket, legacy)
+3. Anything else will be proxied to S3, for other cases that aren't in panoptesuploads (e.g. sciencegossip)
 
 E.g.
 
