@@ -19,10 +19,10 @@ spec:
           resources:
             requests:
               memory: "150Mi"
-              cpu: "250m"
+              cpu: "500m"
             limits:
               memory: "1000Mi"
-              cpu: "500m"
+              cpu: "1000m"
           ports:
             - containerPort: 80
 ---
@@ -35,6 +35,6 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: thumbnailer
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 6
   targetCPUUtilizationPercentage: 80
