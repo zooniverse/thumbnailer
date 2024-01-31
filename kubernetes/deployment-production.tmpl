@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thumbnailer
+  labels:
+    app: thumbnailer
+spec:
+  selector:
+    matchLabels:
+      app: thumbnailer
+  template:
+    metadata:
+      labels:
+        app: thumbnailer
+    spec:
+      containers:
+        - name: thumbnailer-nginx
+          image: ghcr.io/zooniverse/thumbnailer:__IMAGE_TAG__
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "500m"
+            limits:
+              memory: "1000Mi"
+              cpu: "1000m"
+          ports:
+            - containerPort: 80
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: thumbnailer
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: thumbnailer
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 80
