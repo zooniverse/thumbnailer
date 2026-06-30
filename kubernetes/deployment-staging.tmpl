@@ -21,10 +21,10 @@ spec:
             - containerPort: 80
           resources:
             requests:
-              cpu: 100m
-              memory: 250Mi
+              cpu: 50m
+              memory: 150Mi
             limits:
-              cpu: 500m
+              cpu: 250m
               memory: 500Mi
           ports:
             - containerPort: 80
@@ -37,7 +37,6 @@ spec:
               cpu: 100m
               memory: 128Mi
             limits:
-              # Limit CPU to prevent FFmpeg from starving Nginx during spikes
               cpu: 500m
               memory: 512Mi
 ---
