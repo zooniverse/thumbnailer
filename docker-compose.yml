@@ -3,7 +3,15 @@ version: '3'
 services:
   thumbnailer:
     build:
-      context:  ./
+      context: ./
       dockerfile: Dockerfile
+      args:
+        GITHUB_SHA: asdf1234
     ports:
       - "8080:80"
+
+  video-thumbnailer:
+    build:
+      context: ./videos
+      dockerfile: Dockerfile
+    network_mode: "service:thumbnailer"
