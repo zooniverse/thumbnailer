@@ -5,6 +5,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+      args:
+        GITHUB_SHA: asdf1234
     ports:
       - "8080:80"
 
