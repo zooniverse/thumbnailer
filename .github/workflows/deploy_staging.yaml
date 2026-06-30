@@ -2,8 +2,8 @@ name: Deploy to Staging
 
 on:
   push:
-    tags:
-      - production-release
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
